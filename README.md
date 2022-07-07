@@ -1,2 +1,6 @@
 # CSC3007-project
-# https://docs.google.com/presentation/d/1sdj99BZm4jNbwHgemugXjgbgRQfHAeXAxpkRcnKa0lc/edit?usp=sharing
+
+<b>P3-7</b>
+- Wendy Heng (1901898)
+- Crystal Toh (1901851)
+- Fiona Seah (1901878)
