@@ -1,0 +1,25 @@
+*{
+    margin : 0;
+    padding: 0;
+    scroll-behavior: smooth;
+}
+body{
+    width: 100%;
+}
+
+.countries{
+    fill: black;
+    stroke: white;
+    stroke-width: 0.5;
+    cursor: pointer;
+}
+
+.countries:hover{
+    fill: 	black;
+}
+
+.tooltip{
+    position: absolute;
+    background-color: white;
+    color: black;
+}
