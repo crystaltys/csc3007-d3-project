@@ -26,7 +26,7 @@ const infection = (data) => {
     country_data.push(data);
     countryWithData.push(`.${data.Country}`)
 }
-d3.csv("/infection.csv", infection);
+d3.csv("infection.csv", infection);
 
 
 // Map and projection
