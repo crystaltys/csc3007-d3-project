@@ -1,5 +1,5 @@
 let legends = [
-    { label: 'No Data', color: '#bcbcbc' },
+    { label: 'No Data', color: '#eee' },
     { label: 0, color: '#ffedc9' },
     { label: 3, color: '#ffe7b6' },
     { label: 10, color: '#ffd276' },
@@ -10,22 +10,83 @@ let legends = [
 let width = "100%";
 let height = "100%";
 let rectSize = 25;
+var map;
+var country_data = [];
+var slider_country_data = [];
+let allCountries = [];
+let countryWithData = [];
+let countryWithNoData = [];
+let dateData = [];
+var selectedValue;
+//  Slider init starts
 
+var slider = document.getElementById("myRange");
+var output = document.getElementById("demo");
+// output.innerHTML = slider.value;
+
+slider.oninput = function() {
+    selectedValue = dateData[this.value];
+    output.innerHTML = selectedValue
+
+    updateMap();
+}
+
+//  Slider init ends
+
+function updateMap() {
+    slider_country_data = country_data.filter(function(data) {
+        return (new Date(data.date) <= new Date(selectedValue))
+    });
+
+    // Update map colors starts
+    map
+        .attr("fill", function(d) {
+            let ctry = (slider_country_data.find(ctry => ctry.Country === d.properties.name));
+            let color = '#eee';
+            if (ctry) {
+                let confirmedCaseInCtry = ctry.Confirmed_Cases;
+                if (confirmedCaseInCtry > legends[1].label && confirmedCaseInCtry < legends[2].label) { 
+                    color = '#ffedc9' 
+                } else if (confirmedCaseInCtry > legends[2].label && confirmedCaseInCtry < legends[3].label) { 
+                    color = '#ffd276' 
+                } else if (confirmedCaseInCtry > legends[3].label && confirmedCaseInCtry < legends[4].label) { 
+                    color = '#ffbf3c' 
+                } else if (confirmedCaseInCtry > legends[4].label && confirmedCaseInCtry < legends[5].label) { 
+                    color = '#f9b428' 
+                } else if (confirmedCaseInCtry > legends[5].label) { 
+                    color = '#f9b428' 
+                }
+            }
+            return (color)
+        });
+    // Update map colors ends
+}
 let svg = d3
     .select("svg")
     .attr("width", width)
     .attr("height", height)
     .attr("viewBox", `0 0 1000 600`);
 
-var country_data = [];
-let allCountries = [];
-let countryWithData = [];
-let countryWithNoData = [];
+
 
 const infection = (data) => {
     country_data.push(data);
     countryWithData.push(`.${data.Country}`)
+    if (!dateData.includes(data.date)) {
+        dateData.push(data.date);
+        sortDate();
+    }
 }
+
+function sortDate() {
+    dateData.sort((a, b) => Date.parse(a) - Date.parse(b))
+}
+
+function appendMinMaxInSlider() {
+    output.innerHTML = dateData[0];
+    selectedValue = dateData[0];
+}
+
 d3.csv("infection.csv", infection);
 
 
@@ -33,14 +94,6 @@ d3.csv("infection.csv", infection);
 let projection = d3.geoEquirectangular();
 
 let geopath = d3.geoPath().projection(projection);
-
-// THE BACKGROUND OCEAN
-// svg
-//   .append("path")
-//   .datum({ type: "Sphere" })
-//   .attr("id", "ocean")
-//   .attr("d", geopath)
-//   .attr("fill", "lightBlue");
 
 // THE CITY CIRCLES
 svg.append("g")
@@ -52,33 +105,20 @@ svg.append("g")
     .attr("cx", d => projection([d.longitude, d.latitude])[0])
     .attr("cy", d => projection([d.longitude, d.latitude])[1]);
 
-// THE GRATICULE LINES
-// let graticule = d3.geoGraticule().step([10, 10]);
-// svg
-//   .append("g")
-//   .attr("id", "graticules")
-//   .selectAll("path")
-//   .data([graticule()])
-//   .enter()
-//   .append("path")
-//   .attr("d", (d) => geopath(d))
-//   .attr("fill", "none")
-//   .attr("stroke", "#aaa")
-//   .attr("stroke-width", 0.2);
-
 // Load GeoJSON data
 d3.json(
     "https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson"
 ).then((data) => {
     allCountries = data.features.map(cty => `.${cty.properties.name}`);
 
+    appendMinMaxInSlider();
 
     countryWithNoData = allCountries.filter(function(val) {
         return countryWithData.indexOf(val) == -1;
     });
 
     // THE MAP
-    svg
+    map = svg
         .append("g")
         .attr("id", "countries")
         .selectAll("path")
@@ -87,12 +127,7 @@ d3.json(
         .append("path")
         .attr("class", function(d) { return `${d.properties.name} country` })
         .attr("fill", function(d) {
-            let ctry = (country_data.find(ctry => ctry.Country === d.properties.name));
             let color = '#eee';
-            if (ctry) {
-                let confirmedCaseInCtry = ctry.Confirmed_Cases;
-                if (confirmedCaseInCtry > legends[1].label && confirmedCaseInCtry < legends[2].label) { color = '#ffedc9' } else if (confirmedCaseInCtry > legends[2].label && confirmedCaseInCtry < legends[3].label) { color = '#ffd276' } else if (confirmedCaseInCtry > legends[3].label && confirmedCaseInCtry < legends[4].label) { color = '#ffbf3c' } else if (confirmedCaseInCtry > legends[4].label && confirmedCaseInCtry < legends[5].label) { color = '#f9b428' } else if (confirmedCaseInCtry > legends[5].label) { color = '#f9b428' }
-            }
             return (color)
         })
         .attr("d", (d) => geopath(d))
@@ -106,7 +141,6 @@ d3.json(
                     selected = count;
                 }
             })
-
             d3.select(".tooltip")
                 .style("left", event.pageX + "px")
                 .style("top", event.pageY + "px");
@@ -120,6 +154,7 @@ d3.json(
             d3.select(".confirm").text("");
             d3.select(".suspect").text("");
         });
+    updateMap();
 });
 
 function findAllCountryWithConfirmCases(confirmedCases) {
@@ -161,7 +196,6 @@ legendsD
             .duration(200)
             .style("opacity", .2)
             .style("stroke", "transparent");
-
 
         d3.selectAll(classArray.toString())
             .transition()

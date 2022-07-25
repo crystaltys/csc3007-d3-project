@@ -1,16 +1,25 @@
 <html>
+
 <head>
-  <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/main.css">
 </head>
+
 <body>
-  <svg></svg>
-  <div class="tooltip">
-    <p class="name"></p>
-    <p class="confirm"></p>
-    <p class="suspect"></p>
-  </div>
-  <div class="colors"></div>
+    <svg></svg>
+    <div class="tooltip">
+        <p class="name"></p>
+        <p class="confirm"></p>
+        <p class="suspect"></p>
+    </div>
+    <div class="colors">
+
+    </div>
+    <div class="slidecontainer">
+        <input type="range" min="0" max="11" value="0" class="slider" id="myRange">
+        <p style="margin-left: 58%">Date: <span id="demo"></span></p>
+    </div>
 </body>
+
 </html>
 
 <script src="https://d3js.org/d3.v7.min.js"></script>
