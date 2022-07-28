@@ -402,7 +402,7 @@ function legend({
         .attr("xlink:href", ramp(color.interpolator()).toDataURL());
        
   
-      // scaleSequentialQuantile doesn’t implement ticks or tickFormat.
+      // scaleSequentialQuantile doesnâ€™t implement ticks or tickFormat.
       if (!x.ticks) {
         if (tickValues === undefined) {
           const n = Math.round(ticks + 1);
