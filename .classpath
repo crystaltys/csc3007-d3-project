@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-11">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/tyscr.LAPTOP-SRSTJ233/Documents/CSC3010_IR_SYSTEMS/required_jars/json-20220320.jar"/>
+	<classpathentry kind="lib" path="C:/Users/tyscr.LAPTOP-SRSTJ233/Documents/CSC3010_IR_SYSTEMS/required_jars/jsoup-1.15.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/tyscr.LAPTOP-SRSTJ233/Documents/CSC3010_IR_SYSTEMS/required_jars/lucene-analyzers-common-8.1.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/tyscr.LAPTOP-SRSTJ233/Documents/CSC3010_IR_SYSTEMS/required_jars/lucene-backward-codecs-8.1.1-javadoc.jar"/>
+	<classpathentry kind="lib" path="C:/Users/tyscr.LAPTOP-SRSTJ233/Documents/CSC3010_IR_SYSTEMS/required_jars/lucene-core-8.1.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/tyscr.LAPTOP-SRSTJ233/Documents/CSC3010_IR_SYSTEMS/required_jars/lucene-demo-8.1.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/tyscr.LAPTOP-SRSTJ233/Documents/CSC3010_IR_SYSTEMS/required_jars/lucene-queryparser-8.1.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/tyscr.LAPTOP-SRSTJ233/Documents/CSC3010_IR_SYSTEMS/required_jars/json-simple-1.1.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
