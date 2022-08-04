@@ -1,0 +1,62 @@
+
+  /* ticks */
+  .axis line{
+    stroke: #706f6f;
+    stroke-width: 0.5;
+    shape-rendering: crispEdges;
+    }
+    
+  /* axis contour */
+  .axis path {
+  stroke: #706f6f;
+  stroke-width: 0.7;
+  shape-rendering: crispEdges;
+  }
+  
+  /* axis text */
+  .axis text {
+  fill: #2b2929;
+  font-family: Georgia;
+  font-size: 120%;
+  }
+  
+  
+  .line_country_label {
+    fill: #d2d2d2;
+    font-family: Georgia;
+    font-size: 80%;
+    }
+  
+  .line_tooltip {
+    position: absolute;			
+    text-align: center;			
+    width: 150px;					
+    height: 65px;					
+    padding: 2px;				
+    font: 25px sans-serif;		
+    font-family: Georgia;
+    background: lightsteelblue;	
+    border: 0px;		
+    border-radius: 8px;			
+    pointer-events: none;		
+    }
+  
+  
+  .point {
+    stroke: none;
+    fill: #9c9c9c;
+    }
+  
+  .line {
+    fill: none;
+    stroke: #d2d2d2;
+    stroke-width: 5;
+    }
+  
+  .ghost-line {
+    fill: none;
+    /* stroke: #d2d2d2; */
+    stroke: black;
+    opacity: 0;
+    stroke-width: 10;
+    }
