@@ -257,7 +257,7 @@ draw_choropleth();
 
 function draw_choropleth(){
     Promise.all([d3.json("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson"), d3.csv("https://raw.githubusercontent.com/crystaltys/CSC3007-project/main/infection.csv"),d3.json("https://raw.githubusercontent.com/eesur/country-codes-lat-long/master/country-codes-lat-long-alpha3.json"),
-                 d3.csv("https://raw.githubusercontent.com/crystaltys/CSC3007-project/main/daily_cases.csv")]).then((data) => {
+                 d3.csv("https://raw.githubusercontent.com/crystaltys/CSC3007-project/main/daily_trans.csv")]).then((data) => {
         
         let map = data[0];
         let csv = data[1];
